@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Environment
+.env
+api/.env
+web/.env
+
+# Build
+web/dist/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+*.egg
+.pytest_cache/
+
+# Docker
+.docker/
+
+# Temp
+tmp/
+temp/
+*.tmp
+
+# Test & debug files
+api/test_doc.txt
+api/test_cn.txt
+api/pet_knowledge.txt
+api/init_db.py
+api/test_api.py
+*.log
+
+# Claude
+.claude/

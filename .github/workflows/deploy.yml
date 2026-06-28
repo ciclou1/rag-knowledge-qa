@@ -1,0 +1,38 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  # 触发 EdgeOne Pages 自动部署（前端）
+  # EdgeOne 在导入 Git 仓库后会自动检测 push 并重新构建
+  trigger-edgeone:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trigger EdgeOne Deploy
+        if: ${{ secrets.EDGEONE_DEPLOY_HOOK != '' }}
+        run: |
+          curl -X POST "${{ secrets.EDGEONE_DEPLOY_HOOK }}"
+
+  # 后端部署到 Lighthouse
+  deploy-backend:
+    runs-on: ubuntu-latest
+    needs: trigger-edgeone
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to Lighthouse via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.LIGHTHOUSE_HOST }}
+          username: ${{ secrets.LIGHTHOUSE_USER }}
+          key: ${{ secrets.LIGHTHOUSE_SSH_KEY }}
+          script: |
+            cd /opt/rag-api
+            git pull origin main
+            docker build -t rag-api ./api
+            docker stop rag-api || true
+            docker rm rag-api || true
+            docker run -d --name rag-api -p 8000:8000 --env-file ./api/.env --restart=unless-stopped rag-api

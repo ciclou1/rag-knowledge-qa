@@ -1,0 +1,29 @@
+# FastAPI core
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+python-multipart>=0.0.18
+
+# LangChain & AI
+langchain>=0.3.0
+langchain-community>=0.3.0
+langchain-openai>=0.3.0
+httpx>=0.27.0
+
+# Supabase (pgvector)
+supabase>=2.7.0
+pgvector>=0.3.0
+
+# COS
+cos-python-sdk-v5>=1.9.0
+
+# Document parsing
+PyPDF2>=3.0.0
+python-docx>=1.1.0
+markdown>=3.7
+
+# Config
+python-dotenv>=1.0.0
+pydantic-settings>=2.7.0
+
+# Utils
+aiofiles>=24.0.0
