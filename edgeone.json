@@ -1,0 +1,6 @@
+{
+  "build": {
+    "command": "cd web && npm install && npm run build",
+    "outputDir": "web/dist"
+  }
+}
