@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.0",
-    "@edgeone/vite": "^1.1.0",
     "antd": "^5.22.0",
     "axios": "^1.7.9",
     "react": "^18.3.1",
